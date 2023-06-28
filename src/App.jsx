@@ -11,19 +11,24 @@ import SearchResult from "./pages/searchResult/SearchResult";
 import Explore from "./pages/explore/Explore";
 import PageNotFoud from "./pages/404/PageNotFound";
 
+
 function App() {
   const { url } = useSelector((state) => state.home);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getData();
+    getDataconfiguration();
   }, []);
 
-  const getData = () => {
-    fetchData("/movie/popular")
+  const getDataconfiguration = () => {
+    fetchData("/configuration")
       .then((res) => {
-        console.log(res);
-        dispatch(getApiConfiguration(res));
+        const url = {
+          backdrop: res.images.secure_base_url + 'original',
+          poster: res.images.secure_base_url + 'original',
+          profile: res.images.secure_base_url + 'original',
+        }
+        dispatch(getApiConfiguration(url));
       })
       .catch((err) => {
         console.log(err);
@@ -33,7 +38,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Header />
+        {/* <Header /> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/:mediaType/:id" element={<Details />} />
@@ -41,7 +46,7 @@ function App() {
           <Route path="/explore/:mediaType" element={<Explore />} />
           <Route path="*" element={<PageNotFoud />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </BrowserRouter>
     </div>
   );
