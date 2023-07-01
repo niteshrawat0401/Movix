@@ -18,6 +18,28 @@ const Header = () => {
   const navigate = useNavigate();
   const loacation = useLocation();
 
+  const controlNavbar = ()=>{
+    if(window.scrollY > 200){
+      if(window.scrollY > lastScrolly){
+        setShow('hide')
+      }
+      else{
+        setShow('show')
+      }
+    }
+    else{
+      setShow('top')
+    }
+    setLastScrolly(window.scrollY)
+  }
+
+  useEffect(()=>{
+    window.addEventListener('scroll', controlNavbar)
+    return ()=>{
+      window.removeEventListener('scroll', controlNavbar)
+    }
+  }, [lastScrolly])
+
   const searchQueryHandler = (event) => {
     if (event.key === "Enter" && query.length > 0) {
       navigate(`/search/${query}`);
@@ -57,7 +79,7 @@ const Header = () => {
           <li className="menuItem" onClick={()=> navigationalHandler('movie')}>Movies</li>
           <li className="menuItem" onClick={()=> navigationalHandler('tv')}>TV Showes</li>
           <li className="menuItem">
-            <HiOutlineSearch />
+            <HiOutlineSearch onClick={openSearch}/>
           </li>
         </ul>
 
