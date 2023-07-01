@@ -2,7 +2,7 @@ import React from 'react'
 
 const ContentWrapper = ({children}) => {
   return (
-    <div className='contentWrapper'>{children}</div>
+    <div className="contentWrapper">{children}</div>
   )
 }
 
