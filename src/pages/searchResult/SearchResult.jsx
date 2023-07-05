@@ -2,12 +2,12 @@ import React, {useState, useEffect} from 'react'
 import './style.scss'
 
 import { fetchData } from '../../utils/api'
-import ContentWraper from '../../components/contentWrapper/contentWrapper'
 import MovieCard from '../../components/movieCard/MovieCard'
 import Spinner from '../../components/spinner/Spinner'
 // import noRsults from '../../assets/no-results.png'
 import { useParams } from 'react-router-dom'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import ContentWrapper from '../../components/contentWrapper/ContentWrapper'
 
 const SearchResult = () => {
   const [data, setData] = useState(null);
@@ -50,7 +50,7 @@ const SearchResult = () => {
     <div className='searchResultsPage'>
       {loading && <Spinner initial={true}/>}
       {!loading && (
-        <ContentWraper>
+        <ContentWrapper>
           {data?.results?.length > 0 ? (
           <>
           <div className="pageTitle">
@@ -80,7 +80,7 @@ const SearchResult = () => {
               Sorry, Results not found
             </span>
           )}
-        </ContentWraper>
+        </ContentWrapper>
       )}
     </div>
   )
