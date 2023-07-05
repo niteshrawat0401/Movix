@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchData } from "../utils/api";
+import { fetchDataFromApi } from "../utils/api";
 
 const useFetch = (url) => {
   const [loading, setLoading] = useState(null);
@@ -11,7 +11,7 @@ const useFetch = (url) => {
     setData(null);
     setError(null);
 
-    fetchData(url)
+    fetchDataFromApi(url)
       .then((res) => {
         setLoading(false);
         setData(res);
